@@ -15,10 +15,6 @@ public class main {
             System.out.print(planets.getPlanets().get(i).getPl_name());
             System.out.print(" - Dec: " + planets.getPlanets().get(i).getDec());
             System.out.println();
-
-            //github sucks flaccid cock
-            // so does radovid
-            //tho he do be chadovid
         }
     }
 
