@@ -1,7 +1,10 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Planet {
 //    pl_name,pl_masse,ra,dec
+    private double planetMass;
+    static double earthMass = 5973600000000000000000000.0;
     private String pl_name;
     private int sy_snum;
     private int sy_pnum;
@@ -32,6 +35,10 @@ public class Planet {
     private double sy_bmag;
     private double ra;
     private double dec;
+
+    public double getPlanetMass(){
+        return pl_masse*earthMass;
+    }
 
     public String getPl_name() {
         return pl_name;
@@ -264,4 +271,5 @@ public class Planet {
     public void setSy_pnum(int sy_pnum) {
         this.sy_pnum = sy_pnum;
     }
+
 }
