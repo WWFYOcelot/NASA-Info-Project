@@ -33,8 +33,6 @@ public class Planet {
     private float pl_ratdor;
     private float st_lum;
     private double sy_bmag;
-    private double ra;
-    private double dec;
 
     public double getPlanetMass(){
         return pl_masse*earthMass;
@@ -52,19 +50,6 @@ public class Planet {
     public void setPl_masse(float pl_masse) {
         this.pl_masse = pl_masse;
     }
-    public double getRa() {
-        return ra;
-    }
-    public void setRa(double ra) {
-        this.ra = ra;
-    }
-    public double getDec() {
-        return dec;
-    }
-    public void setDec(double dec) {
-        this.dec = dec;
-    }
-
     public int getSy_snum() {
         return sy_snum;
     }
