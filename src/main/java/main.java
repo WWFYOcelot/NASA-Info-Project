@@ -1,22 +1,19 @@
 import java.io.*;
 import java.net.URI;
 import java.net.http.*;
-import java.util.ArrayList;
+import java.util.*;
 
 import org.json.*;
 import com.google.gson.Gson;
 
 public class main {
+    Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        var planets = getData("https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+pl_name,pl_masse,ra,dec+from+ps+where+pl_masse+between+0.5+and+2.0&format=json");
-        for (int i = 0; i < planets.getPlanets().size(); i++) {
-            System.out.print(planets.getPlanets().get(i).getPl_name());
-            System.out.print(" - Dec: " + planets.getPlanets().get(i).getDec());
-            System.out.println();
+    // https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select
+        Planets planetDataA = getData("https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+pl_name+from+ps&format=json");
         }
-    }
 
     public static Planets getData(String a) throws IOException, InterruptedException {
         var client = HttpClient.newHttpClient();
