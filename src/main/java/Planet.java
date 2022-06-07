@@ -1,11 +1,16 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Planet {
 //    pl_name,pl_masse,ra,dec
+    private double planetMass;
+    static double earthMass = 5973600000000000000000000.0;
     private String pl_name;
     private int sy_snum;
     private int sy_pnum;
     private int sy_mnum;
     private int cb_flag;
-    private String discoverymethod;
+    private String discovermethod;
     private int disc_year;
     private double pl_orbper;
     private double pl_rade;
@@ -28,6 +33,12 @@ public class Planet {
     private float pl_ratdor;
     private float st_lum;
     private double sy_bmag;
+    private double ra;
+    private double dec;
+
+    public double getPlanetMass(){
+        return pl_masse*earthMass;
+    }
 
     public String getPl_name() {
         return pl_name;
@@ -40,6 +51,18 @@ public class Planet {
     }
     public void setPl_masse(float pl_masse) {
         this.pl_masse = pl_masse;
+    }
+    public double getRa() {
+        return ra;
+    }
+    public void setRa(double ra) {
+        this.ra = ra;
+    }
+    public double getDec() {
+        return dec;
+    }
+    public void setDec(double dec) {
+        this.dec = dec;
     }
 
     public int getSy_snum() {
@@ -215,6 +238,14 @@ public class Planet {
         this.disc_year = disc_year;
     }
 
+    public String getDiscovermethod() {
+        return discovermethod;
+    }
+
+    public void setDiscovermethod(String discovermethod) {
+        this.discovermethod = discovermethod;
+    }
+
     public int getCb_flag() {
         return cb_flag;
     }
@@ -231,14 +262,6 @@ public class Planet {
         this.sy_mnum = sy_mnum;
     }
 
-    public String getDiscoverymethod() {
-        return discoverymethod;
-    }
-
-    public void setDiscoverymethod(String discoverymethod) {
-        this.discoverymethod = discoverymethod;
-    }
-
     public void setSy_snum(int sy_snum) {
         this.sy_snum = sy_snum;
     }
@@ -248,4 +271,5 @@ public class Planet {
     public void setSy_pnum(int sy_pnum) {
         this.sy_pnum = sy_pnum;
     }
+
 }
