@@ -5,6 +5,11 @@ public class Planet {
 //    pl_name,pl_masse,ra,dec
     private double planetMass;
     static double earthMass = 5973600000000000000000000.0;
+    static double earthTemp = 255.0;
+    static double earthOrbitalDistance = 149598261.0;
+    static double sunLuminosity = Math.pow(3.9, 1026);
+    static double primeEccentricity = 0.000;
+
     private String pl_name;
     private int sy_snum;
     private int sy_pnum;
@@ -255,6 +260,22 @@ public class Planet {
     }
     public void setSy_pnum(int sy_pnum) {
         this.sy_pnum = sy_pnum;
+    }
+
+    public double gradeStat(double earthStat, double planetStat){
+        double stat;
+        stat = (earthStat - planetStat)/earthStat;
+        if(stat <= 0){
+            stat*=-1;
+        }
+        return stat;
+    }
+    public ArrayList<Double> compareStat(){
+        ArrayList<Double> grades = new ArrayList<Double>();
+        grades.add(gradeStat(earthMass, planetMass));
+        grades.add(gradeStat(earthTemp, getPl_eqt()));
+        grades.add(gradeStat(earthOrbitalDistance, getPl_orbsmax()));
+        return grades;
     }
 
 }
