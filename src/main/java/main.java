@@ -50,8 +50,8 @@ public class main {
         System.out.println();
         System.out.println("Type a number to select that planet");
         int num = sc.nextInt();
-        if (num < planets.getPlanets().size()) {
-            display(planets.getPlanets().get(num));
+        if (num <= planets.getPlanets().size()) {
+            display(planets.getPlanets().get(num - 1));
         }
     }
 
@@ -68,7 +68,7 @@ public class main {
         switch (num) {
             case 1:
                 System.out.println("Discovery Year     Planetary Mass     Planetary Radius     Orbital Period     Temperature     System: # stars   # planets   # moons     System Distance");
-                System.out.format("%d %21.5f %18.5f %23.5f %17f %15d %10d %10d %19f\n", planet.getDisc_year(), planet.getPl_masse(), planet.getPl_rade(), planet.getPl_orbper(), planet.getPl_eqt(), planet.getSy_snum(), planet.getSy_pnum(), planet.getSy_mnum(), planet.getSy_dist());
+                System.out.format("%d %21.3f %18.3f %23.3f %17.3f %15d %10d %10d %19.3f\n", planet.getDisc_year(), planet.getPl_masse(), planet.getPl_rade(), planet.getPl_orbper(), planet.getPl_eqt(), planet.getSy_snum(), planet.getSy_pnum(), planet.getSy_mnum(), planet.getSy_dist());
                 display(planet);
                 break;
             case 2:
@@ -77,7 +77,8 @@ public class main {
                 break;
             case 3:
                 getSolar(planet);
-                System.out.println(planet.getSt_age());
+                System.out.println("Spectral Type   Temperature   Solar Radius   Solar Mass   Stellar Metallicity   Surface Gravity   Stellar Density   Stellar Age");
+                System.out.format("%s %19.3f %13.3f %14.3f %12.3f %21.3f %17.3f %17.3f", planet.getSt_spectype(), planet.getSt_teff(), planet.getSt_rad(), planet.getSt_mass(), planet.getSt_met(), planet.getSt_logg(), planet.getSt_dens(), planet.getSt_age());
                 display(planet);
                 break;
             case 4:
