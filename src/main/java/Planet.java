@@ -9,6 +9,11 @@ public class Planet {
     static double earthOrbitalDistance = 149598261.0;
     static double sunLuminosity = Math.pow(3.9, 1026);
     static double primeEccentricity = 0.000;
+    static ArrayList<Double> earthStats;
+    private ArrayList<Double> planetStats;
+
+
+
 
     private String pl_name;
     private int sy_snum;
@@ -39,6 +44,22 @@ public class Planet {
     private float st_lum;
     private double sy_bmag;
 
+    public ArrayList<Double> getEarthStats(){
+        earthStats.add(earthTemp);
+        earthStats.add(earthMass);
+        earthStats.add(earthOrbitalDistance);
+        earthStats.add(sunLuminosity);
+        earthStats.add(primeEccentricity);
+        return earthStats;
+    }
+    public ArrayList<Double> getPlanetStats(){
+        planetStats.add((double)(getPl_eqt()));
+        planetStats.add(getPlanetMass());
+        planetStats.add(getPl_orbsmax());
+        planetStats.add((double)(getSt_lum()));
+        planetStats.add((double)(getPl_orbeccen()));
+        return planetStats;
+    }
     public double getPlanetMass(){
         return pl_masse*earthMass;
     }
@@ -270,11 +291,11 @@ public class Planet {
         }
         return stat;
     }
-    public ArrayList<Double> compareStat(){
+    public ArrayList<Double> planetStatGrades(){
         ArrayList<Double> grades = new ArrayList<Double>();
-        grades.add(gradeStat(earthMass, planetMass));
-        grades.add(gradeStat(earthTemp, getPl_eqt()));
-        grades.add(gradeStat(earthOrbitalDistance, getPl_orbsmax()));
+        for(int i = 0; i < planetStats.size(); i++){
+            grades.add(gradeStat(getEarthStats().get(i), getPlanetStats().get(i)));
+        }
         return grades;
     }
 
