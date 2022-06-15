@@ -26,10 +26,16 @@ public class main {
 
     public static String formatName(String a) {
         String[] b = a.split(" ");
-        b[0] = b[0].concat("%20");
+        for (int i = 0; i < b.length-1; i++) {
+            b[i] += "%20";
+        }
         b[0] = "%27" + b[0];
-        b[1] += "%27";
-        return b[0] + b[1];
+        b[b.length-1] += "%27";
+        String d = "";
+        for (String c:b) {
+            d += c;
+        }
+    return d;
     }
 
     public static Planets getAllData(String a) throws IOException, InterruptedException {
@@ -53,6 +59,7 @@ public class main {
         System.out.println("WELCOME TO THE PLANETARY DATA DISPLAY");
         System.out.println("Press 1 to choose a planet");
         System.out.println("Press 2 to see a list of all planets");
+        System.out.println("Press 3 to exit");
         int num = sc.nextInt();
         sc.nextLine();
         switch(num) {
@@ -66,6 +73,8 @@ public class main {
                 }
             case 2:
                 menu(planets);
+                break;
+            case 3:
                 break;
         }
     }
