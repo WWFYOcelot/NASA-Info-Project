@@ -7,8 +7,8 @@ public class Planet {
     static double earthMass = 5973600000000000000000000.0;
     static double earthTemp = 255.0;
     static double earthOrbitalDistance = 149598261.0;
-    static double sunLuminosity = Math.pow(3.9, 1026);
-    static double primeEccentricity = 0.000;
+    static double sunLuminosity = Math.pow(3.8, 10);
+    static double primeEccentricity = 0.00001;
     static ArrayList<Double> earthStats;
     private ArrayList<Double> planetStats;
     private String pl_name;
