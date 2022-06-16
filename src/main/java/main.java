@@ -2,6 +2,7 @@ import java.io.*;
 import java.net.URI;
 import java.net.http.*;
 import java.util.*;
+import javax.swing.*;
 
 import org.json.*;
 import com.google.gson.Gson;
@@ -16,6 +17,8 @@ public class main {
             e.printStackTrace();
         }
     }
+
+
 
     public main(){
     }
@@ -38,6 +41,17 @@ public class main {
     return d;
     }
 
+    public static Planet getData(String a) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder(URI.create(a))
+                .header("accept", "application/json").build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        JSONArray arr = new JSONArray(response.body());
+
+        Planet planet = new Gson().fromJson(arr.get(0).toString(), Planet.class);
+        return planet;
+    }
+
     public static Planets getAllData(String a) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder(URI.create(a))
@@ -57,7 +71,7 @@ public class main {
 
     public static void start() throws IOException, InterruptedException {
         System.out.println("WELCOME TO THE PLANETARY DATA DISPLAY");
-        System.out.println("Press 1 to choose a planet");
+        System.out.println("Press 1 to choose a planet by name");
         System.out.println("Press 2 to see a list of all planets");
         System.out.println("Press 3 to exit");
         int num = sc.nextInt();
@@ -132,16 +146,6 @@ public class main {
         }
     }
 
-    public static Planet getData(String a) throws IOException, InterruptedException {
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder(URI.create(a))
-                .header("accept", "application/json").build();
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        JSONArray arr = new JSONArray(response.body());
-
-        Planet planet = new Gson().fromJson(arr.get(0).toString(), Planet.class);
-        return planet;
-    }
 
     public static void getDefault(Planet planet) throws IOException, InterruptedException {
         Planet defaultData = getData("https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+pl_name,disc_year,pl_masse,pl_rade,pl_orbper,pl_eqt,sy_snum,sy_pnum,sy_mnum,sy_dist+from+ps+where+pl_name+=+"+formatName(planet.getPl_name())+"&format=json");
