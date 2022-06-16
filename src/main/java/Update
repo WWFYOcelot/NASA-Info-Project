@@ -1,0 +1,129 @@
+   public static void testing() {
+        Planet pl1 = new Planet(1.0f, 255.0f, 149598261.0, (float) (Math.pow(3.8, 10)), 0.00001f);
+        planets.getPlanets().add(0, pl1);
+        for (int i = 0; i < planets.getPlanets().get(0).importantPlanetStats().size(); i++) {
+            System.out.println(planets.getPlanets().get(0).importantPlanetStats().get(i));
+        }
+        for (int i = 0; i < planets.getPlanets().get(0).planetStatGrades().size(); i++) {
+            System.out.println(planets.getPlanets().get(0).planetStatGrades().get(i));
+        }
+        System.out.println(planets.getPlanets().get(0).lifePredictor());
+    }
+
+    public static void planetStatTable(int listSize) {
+        JFrame jFrame = new JFrame();
+        ArrayList<Integer> planetList = new ArrayList<Integer>();
+        for(int i = 0; i < listSize; i ++){
+            System.out.println("New Planet Location");
+            planetList.add(sc.nextInt());
+        }
+        String[][] tableData = new String[planetList.size()-1][5];
+        for (int i = 0; i < tableData.length; i++) {
+            for (int j = 0; j < tableData[i].length; j++) {
+                tableData[i][j] = toString(planets.getPlanets().get(planetList.get(i)).importantPlanetStats().get(j));
+            }
+        }
+
+        String[] tableColumn = {"Mass", "Temp", "Orbital Distance", "Local Stellar Luminosity", "Eccentricity"};
+
+        JTable jTable = new JTable(tableData, tableColumn);
+
+        jTable.setBounds(30, 40, 230, 280);
+
+        JScrollPane jScrollPane = new JScrollPane(jTable);
+        jFrame.add(jScrollPane);
+        jFrame.setSize(350, 300);
+        jFrame.setVisible(true);
+    }
+    public static String toString(double num){
+        String string = "";
+        return string + num;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //for planet file
+    public double gradeStat(double earthStat, double planetStat){
+        double stat;
+        stat = (earthStat - planetStat)/earthStat;
+        if(stat < 0){
+            stat*=-1;
+        }
+        return stat;
+    }
+    public ArrayList<Double> earthData(){
+        ArrayList<Double> earthStats = new ArrayList<Double>();
+        earthStats.add(earthMass);
+        earthStats.add(earthTemp);
+        earthStats.add(earthOrbitalDistance);
+        earthStats.add(sunLuminosity);
+        earthStats.add(primeEccentricity);
+        return earthStats;
+    }
+    public ArrayList<Double> importantPlanetStats(){
+        ArrayList<Double> stats = new ArrayList<Double>();
+        if(getPlanetMass() > 0){
+            stats.add(getPlanetMass());
+        }
+        else if(getPlanetMass() == 0){
+            stats.add(-1.0);
+        }
+        if(getPl_eqt() > 0){
+            stats.add((double)(getPl_eqt()));
+        }
+        else if(getPl_eqt() == 0){
+            stats.add(-1.0);
+        }
+        if(getPl_orbsmax() > 0){
+            stats.add(getPl_orbsmax());
+        }
+        else if(getPl_orbsmax() == 0){
+            stats.add(-1.0);
+        }
+        if(getSt_lum() > 0){
+            stats.add((double)(getSt_lum()));
+        }
+        else if(getSt_lum() == 0){
+            stats.add(-1.0);
+        }
+        if(getPl_orbeccen() > 0){
+            stats.add((double)(getPl_orbeccen()));
+        }
+        else if(getPl_orbeccen() == 0){
+            stats.add(-1.0);
+        }
+        return stats;
+    }
+
+    public ArrayList<Double> planetStatGrades(){
+        ArrayList<Double> grades = new ArrayList<Double>();
+        for(int i = 0; i < importantPlanetStats().size(); i ++){
+            if(importantPlanetStats().get(i) != -1.0) {
+                grades.add(gradeStat(earthData().get(i), importantPlanetStats().get(i)));
+            }
+            else if(importantPlanetStats().get(i) == -1.0){
+                grades.add(-1.0);
+            }
+        }
+        return grades;
+    }
+
+    public double lifePredictor(){
+        ArrayList<Double> weight = new ArrayList<Double>();
+        double denomenator = 0.0;
+        double numerator = 0.0;
+        for(int i = 0; i < planetStatGrades().size(); i++){
+            weight.add(0.20 + 1.0 - planetStatGrades().get(i));
+        }
+        for(int i = 0; i < planetStatGrades().size(); i++){
+            numerator += planetStatGrades().get(i)*weight.get(i);
+            denomenator += weight.get(i);
+        }
+        return numerator/denomenator;
+    }
