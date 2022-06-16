@@ -181,4 +181,45 @@ public class main {
         planet.setPl_orbsmax(extended.getPl_orbsmax());
         planet.setPl_ratdor(extended.getPl_ratdor());
     }
+        public static void testing() {
+        Planet pl1 = new Planet(1.0f, 255.0f, 149598261.0, (float) (Math.pow(3.8, 10)), 0.00001f);
+        planets.getPlanets().add(0, pl1);
+        for (int i = 0; i < planets.getPlanets().get(0).importantPlanetStats().size(); i++) {
+            System.out.println(planets.getPlanets().get(0).importantPlanetStats().get(i));
+        }
+        for (int i = 0; i < planets.getPlanets().get(0).planetStatGrades().size(); i++) {
+            System.out.println(planets.getPlanets().get(0).planetStatGrades().get(i));
+        }
+        System.out.println(planets.getPlanets().get(0).lifePredictor());
+    }
+
+    public static void planetStatTable(int listSize) {
+        JFrame jFrame = new JFrame();
+        ArrayList<Integer> planetList = new ArrayList<Integer>();
+        for(int i = 0; i < listSize; i ++){
+            System.out.println("New Planet Location");
+            planetList.add(sc.nextInt());
+        }
+        String[][] tableData = new String[planetList.size()-1][5];
+        for (int i = 0; i < tableData.length; i++) {
+            for (int j = 0; j < tableData[i].length; j++) {
+                tableData[i][j] = toString(planets.getPlanets().get(planetList.get(i)).importantPlanetStats().get(j));
+            }
+        }
+
+        String[] tableColumn = {"Mass", "Temp", "Orbital Distance", "Local Stellar Luminosity", "Eccentricity"};
+
+        JTable jTable = new JTable(tableData, tableColumn);
+
+        jTable.setBounds(30, 40, 230, 280);
+
+        JScrollPane jScrollPane = new JScrollPane(jTable);
+        jFrame.add(jScrollPane);
+        jFrame.setSize(350, 300);
+        jFrame.setVisible(true);
+    }
+    public static String toString(double num){
+        String string = "";
+        return string + num;
+    }
 }
