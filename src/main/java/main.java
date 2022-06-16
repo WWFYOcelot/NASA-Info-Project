@@ -22,7 +22,8 @@ public class main {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        start();
+        planetStatTable(3);
+        //start();
     }
 
     public static String formatName(String a) {
@@ -187,7 +188,7 @@ public class main {
             System.out.println("New Planet Location");
             planetList.add(sc.nextInt());
         }
-        String[][] tableData = new String[planetList.size()-1][5];
+        String[][] tableData = new String[planetList.size()][5];
         for (int i = 0; i < tableData.length; i++) {
             for (int j = 0; j < tableData[i].length; j++) {
                 tableData[i][j] = toString(planets.getPlanets().get(planetList.get(i)).importantPlanetStats().get(j));
