@@ -282,17 +282,80 @@ public class Planet {
     public double gradeStat(double earthStat, double planetStat){
         double stat;
         stat = (earthStat - planetStat)/earthStat;
-        if(stat <= 0){
+        if(stat < 0){
             stat*=-1;
         }
         return stat;
     }
+    public ArrayList<Double> earthData(){
+        ArrayList<Double> earthStats = new ArrayList<Double>();
+        earthStats.add(earthMass);
+        earthStats.add(earthTemp);
+        earthStats.add(earthOrbitalDistance);
+        earthStats.add(sunLuminosity);
+        earthStats.add(primeEccentricity);
+        return earthStats;
+    }
+    public ArrayList<Double> importantPlanetStats(){
+        ArrayList<Double> stats = new ArrayList<Double>();
+            if(getPlanetMass() > 0){
+                stats.add(getPlanetMass());
+            }
+            else if(getPlanetMass() == 0){
+                stats.add(-1.0);
+            }
+            if(getPl_eqt() > 0){
+                stats.add((double)(getPl_eqt()));
+            }
+            else if(getPl_eqt() == 0){
+                stats.add(-1.0);
+            }
+            if(getPl_orbsmax() > 0){
+                stats.add(getPl_orbsmax());
+            }
+            else if(getPl_orbsmax() == 0){
+                stats.add(-1.0);
+            }
+            if(getSt_lum() > 0){
+                stats.add((double)(getSt_lum()));
+            }
+            else if(getSt_lum() == 0){
+                stats.add(-1.0);
+            }
+            if(getPl_orbeccen() > 0){
+                stats.add((double)(getPl_orbeccen()));
+            }
+            else if(getPl_orbeccen() == 0){
+                stats.add(-1.0);
+            }
+        return stats;
+    }
+
     public ArrayList<Double> planetStatGrades(){
         ArrayList<Double> grades = new ArrayList<Double>();
-        for(int i = 0; i < planetStats.size(); i++){
-            grades.add(gradeStat(getEarthStats().get(i), getPlanetStats().get(i)));
+        for(int i = 0; i < importantPlanetStats().size(); i ++){
+            if(importantPlanetStats().get(i) != -1.0) {
+                grades.add(gradeStat(earthData().get(i), importantPlanetStats().get(i)));
+            }
+            else if(importantPlanetStats().get(i) == -1.0){
+                grades.add(-1.0);
+            }
         }
         return grades;
+    }
+
+    public double lifePredictor(){
+        ArrayList<Double> weight = new ArrayList<Double>();
+        double denomenator = 0.0;
+        double numerator = 0.0;
+        for(int i = 0; i < planetStatGrades().size(); i++){
+            weight.add(0.20 + 1.0 - planetStatGrades().get(i));
+        }
+        for(int i = 0; i < planetStatGrades().size(); i++){
+            numerator += planetStatGrades().get(i)*weight.get(i);
+            denomenator += weight.get(i);
+        }
+        return numerator/denomenator;
     }
 
 }
