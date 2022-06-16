@@ -11,6 +11,7 @@ public class Planet {
     static double primeEccentricity = 0.00001;
     static ArrayList<Double> earthStats;
     private ArrayList<Double> planetStats;
+
     private String pl_name;
     private int sy_snum;
     private int sy_pnum;
