@@ -298,36 +298,36 @@ public class Planet {
     }
     public ArrayList<Double> importantPlanetStats(){
         ArrayList<Double> stats = new ArrayList<Double>();
-            if(getPlanetMass() > 0){
-                stats.add(getPlanetMass());
-            }
-            else if(getPlanetMass() == 0){
-                stats.add(-1.0);
-            }
-            if(getPl_eqt() > 0){
-                stats.add((double)(getPl_eqt()));
-            }
-            else if(getPl_eqt() == 0){
-                stats.add(-1.0);
-            }
-            if(getPl_orbsmax() > 0){
-                stats.add(getPl_orbsmax());
-            }
-            else if(getPl_orbsmax() == 0){
-                stats.add(-1.0);
-            }
-            if(getSt_lum() > 0){
-                stats.add((double)(getSt_lum()));
-            }
-            else if(getSt_lum() == 0){
-                stats.add(-1.0);
-            }
-            if(getPl_orbeccen() > 0){
-                stats.add((double)(getPl_orbeccen()));
-            }
-            else if(getPl_orbeccen() == 0){
-                stats.add(-1.0);
-            }
+        if(getPlanetMass() > 0){
+            stats.add(getPlanetMass());
+        }
+        else if(getPlanetMass() == 0){
+            stats.add(-1.0);
+        }
+        if(getPl_eqt() > 0){
+            stats.add((double)(getPl_eqt()));
+        }
+        else if(getPl_eqt() == 0){
+            stats.add(-1.0);
+        }
+        if(getPl_orbsmax() > 0){
+            stats.add(getPl_orbsmax());
+        }
+        else if(getPl_orbsmax() == 0){
+            stats.add(-1.0);
+        }
+        if(getSt_lum() > 0){
+            stats.add((double)(getSt_lum()));
+        }
+        else if(getSt_lum() == 0){
+            stats.add(-1.0);
+        }
+        if(getPl_orbeccen() > 0){
+            stats.add((double)(getPl_orbeccen()));
+        }
+        else if(getPl_orbeccen() == 0){
+            stats.add(-1.0);
+        }
         return stats;
     }
 
@@ -357,5 +357,4 @@ public class Planet {
         }
         return numerator/denomenator;
     }
-
 }

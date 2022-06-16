@@ -18,8 +18,6 @@ public class main {
         }
     }
 
-
-
     public main(){
     }
 
@@ -180,17 +178,6 @@ public class main {
         planet.setPl_orbincl(extended.getPl_orbincl());
         planet.setPl_orbsmax(extended.getPl_orbsmax());
         planet.setPl_ratdor(extended.getPl_ratdor());
-    }
-        public static void testing() {
-        Planet pl1 = new Planet(1.0f, 255.0f, 149598261.0, (float) (Math.pow(3.8, 10)), 0.00001f);
-        planets.getPlanets().add(0, pl1);
-        for (int i = 0; i < planets.getPlanets().get(0).importantPlanetStats().size(); i++) {
-            System.out.println(planets.getPlanets().get(0).importantPlanetStats().get(i));
-        }
-        for (int i = 0; i < planets.getPlanets().get(0).planetStatGrades().size(); i++) {
-            System.out.println(planets.getPlanets().get(0).planetStatGrades().get(i));
-        }
-        System.out.println(planets.getPlanets().get(0).lifePredictor());
     }
 
     public static void planetStatTable(int listSize) {
