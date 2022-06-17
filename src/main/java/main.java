@@ -22,8 +22,7 @@ public class main {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        planetStatTable(3);
-        //start();
+        start();
     }
 
     public static String formatName(String a) {
@@ -88,6 +87,11 @@ public class main {
                 menu(planets);
                 break;
             case 3:
+                System.exit(0);
+                break;
+            default:
+                System.out.println("Invalid input");
+                start();
                 break;
         }
     }
@@ -118,18 +122,49 @@ public class main {
         switch (num) {
             case 1:
                 getDefault(planet);
-                System.out.println("Discovery Year     Planetary Mass     Planetary Radius     Orbital Period     Temperature     System: # stars   # planets   # moons     System Distance");
+                JFrame jFrame = new JFrame();
+                String[] data = {"Discovery Year", "Planetary Mass", "Planetary Radius", "Orbital Period", "Temperature", "# stars", "# planets", "# moons", "System Distance"};
+                String[][] vals = {{toString(planet.getDisc_year()), toString(planet.getPl_masse()), toString(planet.getPl_rade()), toString(planet.getPl_orbper()), toString(planet.getPl_eqt()), toString(planet.getSy_snum()), toString(planet.getSy_pnum()), toString(planet.getSy_mnum()), toString(planet.getSy_dist())}};
+                JTable jTable = new JTable(vals, data);
+                jTable.setBounds(75,40, 500, 280);
+
+                JScrollPane jScrollPane = new JScrollPane(jTable);
+                jFrame.add(jScrollPane);
+                jFrame.setSize(1000, 300);
+                jFrame.setVisible(true);
+
+                System.out.println("Discovery Year     Planetary Mass     Planetary Radius     Orbital Period     Temperature (K)   System: # stars   # planets   # moons     System Distance");
                 System.out.format("%d %21.3f %18.3f %23.3f %17.3f %15d %10d %10d %19.3f\n", planet.getDisc_year(), planet.getPl_masse(), planet.getPl_rade(), planet.getPl_orbper(), planet.getPl_eqt(), planet.getSy_snum(), planet.getSy_pnum(), planet.getSy_mnum(), planet.getSy_dist());
                 display(planet);
-                break;
             case 2:
                 getExtended(planet);
+                jFrame = new JFrame();
+                data = new String[]{"Eccentricity", "Insolation Flux", "Inclination", "Max Orbit Radius", "Mid-Transit to Stellar Radius Ratio"};
+                vals = new String[][]{{toString(planet.getPl_orbeccen()), toString(planet.getPl_insol()), toString(planet.getPl_orbincl()), toString(planet.getPl_orbsmax()), toString(planet.getPl_ratdor())}};
+                jTable = new JTable(vals, data);
+                jTable.setBounds(75, 40, 500, 280);
+
+                jScrollPane = new JScrollPane(jTable);
+                jFrame.add(jScrollPane);
+                jFrame.setSize(1000, 300);
+                jFrame.setVisible(true);
+
                 System.out.println("Eccentricity   Insolation Flux   Inclination   Max Orbit Radius   Mid-Transit to Stellar Radius Ratio");
                 System.out.format("%f %15.3f %17.3f %14.3f %19.3f\n", planet.getPl_orbeccen(), planet.getPl_insol(), planet.getPl_orbincl(), planet.getPl_orbsmax(), planet.getPl_ratdor());
                 display(planet);
-                break;
             case 3:
                 getSolar(planet);
+                jFrame = new JFrame();
+                data = new String[]{"Spectral Type", "Temperature (K)", "Solar Radius", "Solar Mass", "Stellar Metallicity", "Surface Gravity", "Stellar Density", "Stellar Age"};
+                vals = new String[][]{{planet.getSt_spectype(), toString(planet.getSt_teff()), toString(planet.getSt_rad()), toString(planet.getSt_mass()), toString(planet.getSt_met()), toString(planet.getSt_logg()), toString(planet.getSt_dens()), toString(planet.getSt_age())}};
+                jTable = new JTable(vals, data);
+                jTable.setBounds(75, 40, 500, 280);
+
+                jScrollPane = new JScrollPane(jTable);
+                jFrame.add(jScrollPane);
+                jFrame.setSize(1000, 300);
+                jFrame.setVisible(true);
+
                 System.out.println("Spectral Type   Temperature   Solar Radius   Solar Mass   Stellar Metallicity   Surface Gravity   Stellar Density   Stellar Age");
                 System.out.format("%s %19.3f %13.3f %14.3f %12.3f %21.3f %17.3f %17.3f\n", planet.getSt_spectype(), planet.getSt_teff(), planet.getSt_rad(), planet.getSt_mass(), planet.getSt_met(), planet.getSt_logg(), planet.getSt_dens(), planet.getSt_age());
                 display(planet);
@@ -141,9 +176,15 @@ public class main {
                 start();
                 break;
             case 6:
+                System.exit(0);
+                break;
+            default:
+                System.out.println("Invalid input");
+                display(planet);
                 break;
         }
-    }
+}
+
 
 
     public static void getDefault(Planet planet) throws IOException, InterruptedException {
@@ -179,6 +220,10 @@ public class main {
         planet.setPl_orbincl(extended.getPl_orbincl());
         planet.setPl_orbsmax(extended.getPl_orbsmax());
         planet.setPl_ratdor(extended.getPl_ratdor());
+    }
+
+    public static void huDisplay() {
+        JFrame jframe = new JFrame();
     }
 
     public static void planetStatTable(int listSize) {
